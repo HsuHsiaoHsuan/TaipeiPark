@@ -1,0 +1,53 @@
+package funnybrain.hsu.idv.taipeipark;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import funnybrain.hsu.idv.taipeipark.restful.DataRequest;
+import funnybrain.hsu.idv.taipeipark.restful.RestAPI;
+import funnybrain.hsu.idv.taipeipark.restful.RestAPIBuilder;
+import funnybrain.hsu.idv.taipeipark.restful.model.Park;
+import funnybrain.hsu.idv.taipeipark.restful.model.WrappedData;
+import rx.functions.Action1;
+
+public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
+
+    @BindView(R.id.list) RecyclerView recyclerView;
+
+    private String scope = "resourceAquire";
+    private String rid = "bf073841-c734-49bf-a97f-3757a6013812";
+    private ParkAdapter parkAdapter;
+    private List<Park> dataList = new ArrayList<>();
+
+    private Action1<WrappedData> test = new Action1<WrappedData>() {
+        @Override
+        public void call(WrappedData wrappedData) {
+            dataList.clear();
+            dataList.addAll(wrappedData.getResult().getPark());
+            parkAdapter.notifyDataSetChanged();
+        }
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
+        parkAdapter = new ParkAdapter(this, dataList);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(parkAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        RestAPI api = RestAPIBuilder.buildRetrofitService();
+        DataRequest.performAsyncRequest(api.getData(scope, rid), test);
+    }
+}
