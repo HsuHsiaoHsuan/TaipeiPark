@@ -17,7 +17,7 @@ import funnybrain.hsu.idv.taipeipark.restful.model.Park;
 import funnybrain.hsu.idv.taipeipark.restful.model.WrappedData;
 import rx.functions.Action1;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ParkContract.View {
     private static final String TAG = "MainActivity";
 
     @BindView(R.id.list) RecyclerView recyclerView;
@@ -27,14 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private ParkAdapter parkAdapter;
     private List<Park> dataList = new ArrayList<>();
 
-    private Action1<WrappedData> test = new Action1<WrappedData>() {
-        @Override
-        public void call(WrappedData wrappedData) {
-            dataList.clear();
-            dataList.addAll(wrappedData.getResult().getPark());
-            parkAdapter.notifyDataSetChanged();
-        }
-    };
+    private ParkContract.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +35,34 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        mPresenter = new ParkPresenter(ParkRepository.getInstance(scope, rid), this);
+
         parkAdapter = new ParkAdapter(this, dataList);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(parkAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+    }
 
-        RestAPI api = RestAPIBuilder.buildRetrofitService();
-        DataRequest.performAsyncRequest(api.getData(scope, rid), test);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.loadTask(true);
+    }
+
+    @Override
+    public void setPresenter(ParkContract.Presenter presenter) {
+
+    }
+
+    @Override
+    public void showProgress(boolean show) {
+
+    }
+
+    @Override
+    public void showPark(List<Park> parks) {
+        dataList.clear();
+        dataList.addAll(parks);
+        parkAdapter.notifyDataSetChanged();
     }
 }
