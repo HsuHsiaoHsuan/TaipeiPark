@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements ParkContract.View
 
     @Override
     public void setPresenter(ParkContract.Presenter presenter) {
-
+        mPresenter = presenter;
     }
 
     @Override
