@@ -10,12 +10,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import funnybrain.hsu.idv.taipeipark.restful.DataRequest;
-import funnybrain.hsu.idv.taipeipark.restful.RestAPI;
-import funnybrain.hsu.idv.taipeipark.restful.RestAPIBuilder;
 import funnybrain.hsu.idv.taipeipark.restful.model.Park;
-import funnybrain.hsu.idv.taipeipark.restful.model.WrappedData;
-import rx.functions.Action1;
 
 public class MainActivity extends AppCompatActivity implements ParkContract.View {
     private static final String TAG = "MainActivity";
