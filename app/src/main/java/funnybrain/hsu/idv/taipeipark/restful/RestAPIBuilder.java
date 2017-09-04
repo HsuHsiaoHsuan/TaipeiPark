@@ -6,14 +6,14 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestAPIBuilder {
-    public static RestAPI buildRetrofitService() {
+    public static RestApiService buildRetrofitService() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(RestAPI.API_ENDPOINT)
+                .baseUrl(RestApiService.API_ENDPOINT)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(new OkHttpClient.Builder().build())
                 .build();
 
-        return retrofit.create(RestAPI.class);
+        return retrofit.create(RestApiService.class);
     }
 }

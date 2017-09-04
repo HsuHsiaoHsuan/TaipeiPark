@@ -3,7 +3,7 @@ package funnybrain.hsu.idv.taipeipark;
 import android.util.Log;
 
 import funnybrain.hsu.idv.taipeipark.restful.DataRequest;
-import funnybrain.hsu.idv.taipeipark.restful.RestAPI;
+import funnybrain.hsu.idv.taipeipark.restful.RestApiService;
 import funnybrain.hsu.idv.taipeipark.restful.RestAPIBuilder;
 import funnybrain.hsu.idv.taipeipark.restful.model.WrappedData;
 import rx.functions.Action1;
@@ -14,7 +14,7 @@ public class ParkRepository {
 
     private final String scope;
     private final String rid;
-    private final RestAPI api;
+    private final RestApiService api;
 
     private ParkRepository(String scope, String rid) {
         this.scope = scope;

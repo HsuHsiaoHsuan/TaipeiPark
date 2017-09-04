@@ -5,7 +5,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;
 
-public interface RestAPI {
+public interface RestApiService {
     String API_ENDPOINT = "http://data.taipei/";
 
     @GET("opendata/datalist/apiAccess")

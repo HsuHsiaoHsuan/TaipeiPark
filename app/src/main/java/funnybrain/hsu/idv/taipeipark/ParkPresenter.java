@@ -25,7 +25,6 @@ public class ParkPresenter implements ParkContract.Presenter {
 
     @Override
     public void start() {
-        Log.e("FREEMAN", "FREEMANFREEMANFREEMANFREEMANFREEMANFREEMANFREEMANFREEMANFREEMANFREEMANFREEMANFREEMAN");
         loadTask(false);
     }
 
