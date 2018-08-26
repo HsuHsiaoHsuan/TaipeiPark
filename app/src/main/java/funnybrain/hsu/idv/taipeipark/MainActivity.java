@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements ParkContract.View
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mPresenter = new ParkPresenter(ParkRepository.getInstance(scope, rid), this);
+        mPresenter = new ParkPresenter(ParkRepository.Companion.getInstance(scope, rid), this);
 
         parkAdapter = new ParkAdapter(this, dataList);
         recyclerView.setHasFixedSize(true);
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements ParkContract.View
 
     @Override
     public void showPark(List<Park> parks) {
+        Log.d(TAG, ">>>>> " + parks.size());
         dataList.clear();
         dataList.addAll(parks);
         parkAdapter.notifyDataSetChanged();
