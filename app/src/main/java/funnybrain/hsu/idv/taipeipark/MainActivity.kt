@@ -2,9 +2,8 @@ package funnybrain.hsu.idv.taipeipark
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import funnybrain.hsu.idv.taipeipark.restful.model.Park
-import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.setContentView
 import java.util.*
 
 class MainActivity : AppCompatActivity(), ParkContract.View {
@@ -16,16 +15,17 @@ class MainActivity : AppCompatActivity(), ParkContract.View {
 
     private var mPresenter: ParkContract.Presenter? = null
 
+    lateinit var mainUi: MainActivityUi
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        mainUi = MainActivityUi()
+        mainUi.setContentView(this)
+
+        parkAdapter = ParkAdapter(dataList)
+        mainUi.list.adapter = parkAdapter
 
         mPresenter = ParkPresenter(ParkRepository.getInstance(scope, rid), this)
-
-        parkAdapter = ParkAdapter(this, dataList)
-        list.setHasFixedSize(true)
-        list.adapter = parkAdapter
-        list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 
     override fun onResume() {
