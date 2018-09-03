@@ -1,4 +1,4 @@
-package funnybrain.hsu.idv.taipeipark
+package funnybrain.hsu.idv.taipeipark.main.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import funnybrain.hsu.idv.taipeipark.restful.model.Park
+import funnybrain.hsu.idv.taipeipark.R
+import funnybrain.hsu.idv.taipeipark.data.model.Park
 import kotlinx.android.synthetic.main.item_park.view.*
 import org.jetbrains.anko.layoutInflater
 

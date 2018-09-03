@@ -1,19 +1,21 @@
-package funnybrain.hsu.idv.taipeipark
+package funnybrain.hsu.idv.taipeipark.main
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import funnybrain.hsu.idv.taipeipark.restful.model.Park
+import funnybrain.hsu.idv.taipeipark.main.adapter.ParkAdapter
+import funnybrain.hsu.idv.taipeipark.data.source.ParkRepository
+import funnybrain.hsu.idv.taipeipark.data.model.Park
 import org.jetbrains.anko.setContentView
 import java.util.*
 
-class MainActivity : AppCompatActivity(), ParkContract.View {
+class MainActivity : AppCompatActivity(), MainContract.View {
 
     private val scope = "resourceAquire"
     private val rid = "bf073841-c734-49bf-a97f-3757a6013812"
     private var parkAdapter: ParkAdapter? = null
     private val dataList = ArrayList<Park>()
 
-    private var mPresenter: ParkContract.Presenter? = null
+    private var mPresenter: MainContract.Presenter? = null
 
     lateinit var mainUi: MainActivityUi
 
@@ -25,7 +27,7 @@ class MainActivity : AppCompatActivity(), ParkContract.View {
         parkAdapter = ParkAdapter(dataList)
         mainUi.list.adapter = parkAdapter
 
-        mPresenter = ParkPresenter(ParkRepository.getInstance(scope, rid), this)
+        mPresenter = MainPresenter(ParkRepository.getInstance(scope, rid), this)
     }
 
     override fun onResume() {
@@ -33,7 +35,7 @@ class MainActivity : AppCompatActivity(), ParkContract.View {
         mPresenter!!.loadTask(true)
     }
 
-    override fun setPresenter(presenter: ParkContract.Presenter) {
+    override fun setPresenter(presenter: MainContract.Presenter) {
         mPresenter = presenter
     }
 

@@ -1,8 +1,10 @@
-package funnybrain.hsu.idv.taipeipark
+package funnybrain.hsu.idv.taipeipark.main
 
-import funnybrain.hsu.idv.taipeipark.restful.model.Park
+import funnybrain.hsu.idv.taipeipark.BasePresenter
+import funnybrain.hsu.idv.taipeipark.BaseView
+import funnybrain.hsu.idv.taipeipark.data.model.Park
 
-interface ParkContract {
+interface MainContract {
     interface View : BaseView<Presenter> {
         fun showProgress(show: Boolean)
 
