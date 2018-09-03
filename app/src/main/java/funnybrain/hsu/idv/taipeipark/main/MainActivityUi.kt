@@ -1,8 +1,9 @@
-package funnybrain.hsu.idv.taipeipark
+package funnybrain.hsu.idv.taipeipark.main
 
 import android.support.constraint.ConstraintSet
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import funnybrain.hsu.idv.taipeipark.R
 import org.jetbrains.anko.AnkoComponent
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.constraint.layout.ConstraintSetBuilder

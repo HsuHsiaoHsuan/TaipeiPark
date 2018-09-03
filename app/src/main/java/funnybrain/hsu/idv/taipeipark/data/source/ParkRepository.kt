@@ -1,9 +1,9 @@
-package funnybrain.hsu.idv.taipeipark
+package funnybrain.hsu.idv.taipeipark.data.source
 
 import funnybrain.hsu.idv.taipeipark.restful.DataRequest
 import funnybrain.hsu.idv.taipeipark.restful.RestAPIBuilder
 import funnybrain.hsu.idv.taipeipark.restful.RestApiService
-import funnybrain.hsu.idv.taipeipark.restful.model.WrappedData
+import funnybrain.hsu.idv.taipeipark.data.model.WrappedData
 import rx.functions.Action1
 
 class ParkRepository private constructor(private val scope: String, private val rid: String) {
@@ -14,7 +14,8 @@ class ParkRepository private constructor(private val scope: String, private val 
 
         fun getInstance(scope: String, rid: String): ParkRepository =
                 INSTANCE ?: synchronized(this) {
-                    INSTANCE ?: ParkRepository(scope, rid)
+                    INSTANCE
+                            ?: ParkRepository(scope, rid)
                 }
     }
 

@@ -1,6 +1,6 @@
 package funnybrain.hsu.idv.taipeipark.restful
 
-import funnybrain.hsu.idv.taipeipark.restful.model.WrappedData
+import funnybrain.hsu.idv.taipeipark.data.model.WrappedData
 import retrofit2.http.GET
 import retrofit2.http.Query
 import rx.Observable
