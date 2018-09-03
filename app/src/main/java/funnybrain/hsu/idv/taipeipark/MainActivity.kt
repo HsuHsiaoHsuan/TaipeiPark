@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity(), ParkContract.View {
     }
 
     override fun showProgress(show: Boolean) {
-
     }
 
     override fun showPark(parks: List<Park>) {
